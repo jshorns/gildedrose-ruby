@@ -7,7 +7,7 @@ describe GildedRose do
     describe 'for normal items' do
 
       before(:each) do
-        @items = [Item.new("foo", 3, 4)]
+        @items = [Item.new("foo", 3, 4), Item.new("bar", 0, 2), Item.new("baz", 0, 0)]
         @shop = GildedRose.new(@items)
       end
 
@@ -24,8 +24,16 @@ describe GildedRose do
         expect {@shop.update_quality }.to change {@items[0].quality}.by -1
       end
 
+      it "diminishes quality by 2 when sell_in is below 0" do
+        expect {@shop.update_quality }.to change {@items[1].quality}.by -2
+      end
+
+      it "does not diminish quality past 0" do
+        expect {@shop.update_quality }.not_to change {@items[2].quality}
+      end
+
     end
-    
+
   end
 
 end
