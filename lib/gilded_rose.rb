@@ -14,13 +14,13 @@ class GildedRose
       item.sell_in -= 1
       if item.name == "Aged Brie"
         aged_brie(item)
-        next
-      end
-      if item.name == "Backstage passes to a TAFKAL80ETC concert"
+      elsif item.name == "Backstage passes to a TAFKAL80ETC concert"
         backstage_passes(item)
-        next
+      elsif item.name.match(/^Conjured.*$/)
+        conjured_items(item)
+      else
+        normal_items(item)
       end
-      normal_items(item)
     end
   end
 
@@ -32,6 +32,10 @@ class GildedRose
     else
       2.times { decrease_quality(item) }
     end
+  end
+
+  def conjured_items(item)
+    2.times { normal_items(item) }
   end
 
   def increase_quality(item)

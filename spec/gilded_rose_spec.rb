@@ -34,6 +34,44 @@ describe GildedRose do
 
     end
 
+    describe 'for Conjured items' do
+
+      before(:each) do
+        @items = [
+          Item.new("Conjured foo", 3, 4),
+          Item.new("Conjured foogazi", 3, 1),  
+          Item.new("Conjured bar", 0, 8),
+          Item.new("Conjured barbie", 0, 3),
+          Item.new("Conjured baz", 0, 0)
+          ]
+        @shop = GildedRose.new(@items)
+      end
+
+      it "does not change the name" do
+        @shop.update_quality
+        expect(@items[0].name).to eq "Conjured foo"
+      end
+      it "diminishes sellIn by 1" do
+        expect { @shop.update_quality }.to change { @items[0].sell_in }.by -1
+      end
+      it "diminishes quality by 2 when sell_in is above 0" do
+        expect { @shop.update_quality }.to change { @items[0].quality }.by -2
+      end
+      it 'unless this would take quality past 0' do
+        expect { @shop.update_quality }.to change { @items[1].quality }.by -1
+      end
+      it "diminishes quality by 4 when sell_in is below 0" do
+        expect { @shop.update_quality }.to change { @items[2].quality }.by -4
+      end
+      it 'unless this would take quality past 0' do
+        expect { @shop.update_quality }.to change { @items[3].quality }.by -3
+      end
+      it "does not diminish quality past 0" do
+        expect { @shop.update_quality }.not_to change { @items[4].quality }
+      end
+
+    end
+
     describe 'for legendary items' do
       before(:each) do
         @items = [
