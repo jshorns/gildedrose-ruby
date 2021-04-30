@@ -5,6 +5,8 @@
 ## My approach - Ruby
 
 - Having done the kata once before, I was obviously at an advantage. My first step has been to make the failing test pass, and add basic tests for normal items depreciating in quality and sell by date. I have also refactored the test to use a group. This will make writing further tests more straightforward.
+- I proceeded to write full, detailed test suites for the other categories of items, so that I could refactor knowing it would be easy to identify what i had broken, if I broke anything.
+- I then started refactoring, first changed the .each method to .map, since the iteration in question here is about transforming the data.
 
 ## Kata details
 
