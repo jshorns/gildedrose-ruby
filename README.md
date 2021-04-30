@@ -7,6 +7,10 @@
 - Having done the kata once before, I was obviously at an advantage. My first step has been to make the failing test pass, and add basic tests for normal items depreciating in quality and sell by date. I have also refactored the test to use a group. This will make writing further tests more straightforward.
 - I proceeded to write full, detailed test suites for the other categories of items, so that I could refactor knowing it would be easy to identify what i had broken, if I broke anything.
 - I then started refactoring, first changed the .each method to .map, since the iteration in question here is about transforming the data.
+- I followed a similar process as with my javascript version of the problem. However I followed a slightly different order. I did the guard condition for Sulfuras first, which doesn't get changed at all. I then made increasing and decreasing the quality (unless minimum or maximum reached into private methods so they could easily be called in update_quality.
+- As with the js version, I then added standalone private methods for special categories (brie and backstage passes) and then for normal items.
+- I decided to use a case/when statement in my backstage passes method, as this avoids the need for any nested if conditions. It also enabled me to use the .times method on my increase_quality method, making this code very easy to change (only 1 number needs to change to increase or decrease quality faster or slower)
+- I used if/else statements for normal items and brie being within or beyond the sell by date for the same reason.
 
 ## Kata details
 
