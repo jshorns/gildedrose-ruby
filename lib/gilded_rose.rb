@@ -39,12 +39,15 @@ class GildedRose
   end
 
   def backstage_passes(passes)
-    if passes.sell_in <= 0
-      passes.quality = 0 
-    else
+    case 
+    when passes.sell_in < 0
+      passes.quality = 0
+    when passes.sell_in > 10
       increase_quality(passes)
-      increase_quality(passes) if passes.sell_in < 10
-      increase_quality(passes) if passes.sell_in < 5
+    when passes.sell_in.between?(5, 10)
+      2.times { increase_quality(passes) }
+    when passes.sell_in.between?(0, 5)
+      3.times { increase_quality(passes) }
     end
   end
 
