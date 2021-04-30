@@ -34,6 +34,24 @@ describe GildedRose do
 
     end
 
+    describe 'for legendary items' do
+      before(:each) do
+        @items = [
+          Item.new("Sulfuras, Hand of Ragnaros", 0, 80), 
+          Item.new("Sulfuras, Hand of Ragnaros", -4, 80), 
+          ]
+        @shop = GildedRose.new(@items)
+      end
+      it 'changes nothing' do
+        expect {@shop.update_quality }.not_to change { @items[0].name }
+        expect {@shop.update_quality }.not_to change { @items[0].sell_in }
+        expect {@shop.update_quality }.not_to change { @items[0].quality }
+        expect {@shop.update_quality }.not_to change { @items[0].name }
+        expect {@shop.update_quality }.not_to change { @items[0].sell_in }
+        expect {@shop.update_quality }.not_to change { @items[0].quality }
+      end
+    end
+
     describe 'for aged brie' do
 
       before(:each) do
