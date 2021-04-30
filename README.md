@@ -11,6 +11,8 @@
 - As with the js version, I then added standalone private methods for special categories (brie and backstage passes) and then for normal items.
 - I decided to use a case/when statement in my backstage passes method, as this avoids the need for any nested if conditions. It also enabled me to use the .times method on my increase_quality method, making this code very easy to change (only 1 number needs to change to increase or decrease quality faster or slower)
 - I used if/else statements for normal items and brie being within or beyond the sell by date for the same reason.
+- Accounting for conjured items was then super straightforward. I wrote the test suite first, saw it fail, then added a method to find conjured items and simply call the method for normal items twice.
+- I still feel my update quality method is too long; I can't think of further ways to simplify it at the moment but will keep thinking.
 
 ## Kata details
 
