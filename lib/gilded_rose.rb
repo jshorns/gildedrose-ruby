@@ -16,14 +16,19 @@ class GildedRose
         backstage_passes(item)
         next
       end
-      decrease_quality(item)
-      if item.sell_in < 0
-        decrease_quality(item)
-      end
+      normal_items(item)
     end
   end
 
   private
+
+  def normal_items(item)
+    if item.sell_in >= 0
+      decrease_quality(item)
+    else
+      2.times { decrease_quality(item) }
+    end
+  end
 
   def increase_quality(item)
     item.quality += 1 unless item.quality >= 50
@@ -34,8 +39,11 @@ class GildedRose
   end
 
   def aged_brie(brie)
-    increase_quality(brie)
-    increase_quality(brie) if brie.sell_in <= 0
+    if brie.sell_in >= 0
+      increase_quality(brie)
+    else
+      2.times { increase_quality(brie) }
+    end
   end
 
   def backstage_passes(passes)
