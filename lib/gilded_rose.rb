@@ -1,7 +1,11 @@
 class GildedRose
+  MAX_QUALITY = 50
+  MIN_QUALITY = 0
 
-  def initialize(items)
+  def initialize(items, min_quality = MIN_QUALITY, max_quality = MAX_QUALITY)
     @items = items
+    @min_quality = min_quality
+    @max_quality = max_quality
   end
 
   def update_quality()
@@ -31,11 +35,11 @@ class GildedRose
   end
 
   def increase_quality(item)
-    item.quality += 1 unless item.quality >= 50
+    item.quality += 1 unless item.quality >= @max_quality
   end
 
   def decrease_quality(item)
-    item.quality -= 1 unless item.quality <= 0
+    item.quality -= 1 unless item.quality <= @min_quality
   end
 
   def aged_brie(brie)
