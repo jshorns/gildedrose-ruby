@@ -12,25 +12,13 @@ class GildedRose
         aged_brie(item)
         next
       end
-      if item.name != "Backstage passes to a TAFKAL80ETC concert"
-        decrease_quality(item)
-      else
-        increase_quality(item)
-        if item.name == "Backstage passes to a TAFKAL80ETC concert"
-          if item.sell_in < 11
-            increase_quality(item)
-          end
-          if item.sell_in < 6
-            increase_quality(item)
-          end
-        end
+      if item.name == "Backstage passes to a TAFKAL80ETC concert"
+        backstage_passes(item)
+        next
       end
+      decrease_quality(item)
       if item.sell_in < 0
-          if item.name != "Backstage passes to a TAFKAL80ETC concert"
-            decrease_quality(item)
-          else
-            item.quality = item.quality - item.quality
-          end
+        decrease_quality(item)
       end
     end
   end
@@ -48,6 +36,16 @@ class GildedRose
   def aged_brie(brie)
     increase_quality(brie)
     increase_quality(brie) if brie.sell_in <= 0
+  end
+
+  def backstage_passes(passes)
+    if passes.sell_in <= 0
+      passes.quality = 0 
+    else
+      increase_quality(passes)
+      increase_quality(passes) if passes.sell_in < 10
+      increase_quality(passes) if passes.sell_in < 5
+    end
   end
 
 end
